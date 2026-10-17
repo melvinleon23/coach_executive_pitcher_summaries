@@ -1,17 +1,9 @@
-
-# ============================================================
-# DETROIT TIGERS — CMJ & PITCH VELOCITY ANALYSIS
-# SCRIPT 01: BUILD THE ANALYSIS TABLE
-#
 # PURPOSE:
 # Connect each pitcher's CMJ assessment with their game-level
 # fastball velocity.
 #
 # OUTPUT:
 # A CSV table containing one row per matched pitching game.
-# ============================================================
-
-
 # ------------------------------------------------------------
 # SECTION 1 — IMPORT LIBRARIES
 # ------------------------------------------------------------
@@ -19,12 +11,9 @@
 from pathlib import Path
 import pandas as pd
 
-# Path: allows us to locate files and folders without
-# hardcoding a specific drive letter.
+# Path: allows us to locate files and folders without hardcoding a specific drive letter.
 #
-# pandas: allows us to load, organize, filter, and combine
-# tabular datasets.
-
+# pandas: allows us to load, organize, filter, and combine tabular datasets.
 
 # ------------------------------------------------------------
 # SECTION 2 — DEFINE PROJECT PATHS
@@ -181,18 +170,15 @@ pitch["pitch_type"] = (
     pitch["pitch_type"].astype(str).str.strip().str.upper()
 )
 # CLEAN CMJ METRIC NAMES
-# Remove accidental spaces at the beginning or end
-# of metric names.
+# Remove accidental spaces at the beginning or end of metric names.
 #
-# This prevents the same measurement from appearing
-# as two different columns in our pivot table.
+# This prevents the same measurement from appearing as two different columns in our pivot table.
 
 jump["metric"] = jump["metric"].astype(str).str.strip()
 
 # CHECK FOR DUPLICATE CMJ MEASUREMENTS
 
-# A duplicate occurs when the same athlete has multiple
-# values for the same metric on the same testing date.
+# A duplicate occurs when the same athlete has multiple values for the same metric on the same testing date.
 #
 # keep=False marks every occurrence in a duplicate group.
 
@@ -226,13 +212,12 @@ print(duplicate_measurements.to_string(index=False))
 #
 # Player | Date | Metric | Value
 #
-# We want wide format:
+# Want wide format:
 #
-# Player | Date | Jump Height | Braking Force | Power ...
+# Player | Date | Jump Height | Braking Force 
 #
 # pivot_table() turns metric names into separate columns.
-# aggfunc="mean" handles duplicate measurements for the
-# same athlete, date, and metric.
+# aggfunc="mean" handles duplicate measurements for the same athlete, date, and metric.
 # Identify the measurement unit associated with each metric.
 # drop_duplicates() removes repeated metric/unit combinations.
 
@@ -269,14 +254,12 @@ jump_wide.to_csv(
     index=False
 )
 # ASSESS CMJ METRIC COMPLETENESS
-# Count how many athlete-date assessments have a
-# recorded value for each CMJ metric.
+# Count how many athlete-date assessments have a recorded value for each CMJ metric.
 #
 # notna() returns True for available measurements.
 # sum() counts those True values.
 #
-# This helps identify metrics with insufficient data
-# for meaningful correlation analysis.
+# This helps identify metrics with insufficient data for meaningful correlation analysis.
 
 metric_coverage = (
     jump_wide
@@ -291,8 +274,7 @@ metric_coverage.columns = [
     "available_assessments"
 ]
 
-# Calculate the percentage of assessments containing
-# each measurement.
+# Calculate the percentage of assessments containing each measurement.
 
 total_assessments = len(jump_wide)
 
@@ -322,7 +304,7 @@ print(metric_coverage.head(15).to_string(index=False))
 # ------------------------------------------------------------
 
 # FB = fastball.
-# We exclude other pitch types from this initial analysis
+# Exclude other pitch types from this initial analysis
 # so that pitch-type differences don't distort the results.
 
 fastballs = pitch[
@@ -356,17 +338,15 @@ game_velocity.to_csv(
 # SECTION 8 — MATCH CMJ ASSESSMENTS TO PITCHING GAMES
 # ------------------------------------------------------------
 
-# We use the most recent CMJ assessment on or before a game.
+# Use the most recent CMJ assessment on or before a game.
 #
 # merge_asof() matches records based on their dates.
 #
-# direction="backward" prevents using a future CMJ test
-# to explain an earlier pitching performance.
+# direction="backward" prevents using a future CMJ test to explain an earlier pitching performance.
 #
 # tolerance=7 days restricts the maximum time gap.
 #
-# by="player" ensures pitchers are matched only to
-# their own jump assessments.
+# by="player" ensures pitchers are matched only to their own jump assessments.
 
 game_velocity = game_velocity.sort_values(
     ["game_date", "player"]

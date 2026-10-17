@@ -1,8 +1,3 @@
-
-# ================================================================
-# DETROIT TIGERS — CMJ & FASTBALL VELOCITY
-# SCRIPT 03: REPORT BUILDER
-#
 # DELIVERABLE 1:
 #   Coach Report
 #   - Compact data key

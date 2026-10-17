@@ -1,10 +1,3 @@
-
-# ============================================================
-# DETROIT TIGERS — CMJ & PITCH VELOCITY ASSIGNMENT
-#
-# SCRIPT 02: PERFORMANCE ANALYSIS
-# FILE NAME: performance_analysis.py
-#
 # PURPOSE:
 # 1. Select four CMJ performance indicators.
 # 2. Compare each indicator with game-average FB velocity.
@@ -15,11 +8,7 @@
 #
 # IMPORTANT:
 # Correlations describe associations, not causation.
-# Repeated use of a CMJ assessment across games can
-# affect the independence of observations.
-# ============================================================
-
-
+# Repeated use of a CMJ assessment across games can affect the independence of observations.
 # ------------------------------------------------------------
 # SECTION 1 — IMPORT REQUIRED LIBRARIES
 # ------------------------------------------------------------
@@ -167,8 +156,7 @@ print(f"Pitchers: {df['player'].unique().tolist()}")
 
 # A pitcher might have one CMJ test followed by two games.
 #
-# In that situation, both games share the same jump
-# measurement. We want to identify these repetitions.
+# In that situation, both games share the same jump measurement. We want to identify these repetitions.
 #
 # groupby() groups games by pitcher and jump date.
 # transform("size") counts how many games use that test.
@@ -220,12 +208,10 @@ print(
 # r ranges from -1 to +1.
 #
 # Positive r:
-# Higher CMJ metric values tend to accompany higher
-# average fastball velocities.
+# Higher CMJ metric values tend to accompany higher average fastball velocities.
 #
 # Negative r:
-# Higher CMJ metric values tend to accompany lower
-# average fastball velocities.
+# Higher CMJ metric values tend to accompany lower average fastball velocities.
 #
 # r near zero:
 # Little evidence of a linear relationship.
@@ -421,14 +407,11 @@ for player, player_data in df.groupby("player"):
 # SECTION 8 — CREATE SEASONAL TREND CHARTS
 # ------------------------------------------------------------
 
-# These charts show how each CMJ performance indicator
-# changes over the season.
+# These charts show how each CMJ performance indicator changes over the season.
 #
-# We plot each unique CMJ assessment once, rather than
-# repeating it for every game matched to that assessment.
+# Plot each unique CMJ assessment once, rather than repeating it for every game matched to that assessment.
 #
-# These charts help us examine whether seasonal changes
-# might influence the observed correlations.
+# These charts help us examine whether seasonal changes might influence the observed correlations.
 
 for player, player_data in df.groupby("player"):
 
