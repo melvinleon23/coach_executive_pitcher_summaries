@@ -1,0 +1,16 @@
+#Player datasets
+data/
+
+# Intermediate analysis tables and charts
+outputs/tables/
+outputs/charts/
+
+# Python temporary files
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local environment files
+.env
+.vscode/

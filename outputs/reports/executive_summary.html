@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Executive Summary: CMJ &amp; Fastball Velocity</title>
+
+    <style>
+:root {
+    --navy: #14263b;
+    --teal: #087f8c;
+    --orange: #c87928;
+    --text: #17212b;
+    --muted: #617184;
+    --border: #dfe5eb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f6f8;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+header {
+    background: var(--navy);
+    color: white;
+    padding: 25px 24px;
+}
+
+.header-inner,
+main {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.3px;
+    color: #9dd3d8;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+header h1 {
+    font-size: 25px;
+    margin: 5px 0;
+}
+
+header p {
+    margin: 0;
+    color: #d1dbe4;
+    font-size: 12px;
+}
+
+main {
+    padding: 18px 20px 35px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 19px;
+    margin: 0 0 9px;
+}
+
+h3 {
+    font-size: 15px;
+    margin: 0 0 7px;
+}
+
+p {
+    margin: 7px 0;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.key {
+    padding: 11px 15px;
+}
+
+.key h2 {
+    font-size: 13px;
+    margin: 0 0 7px;
+}
+
+.key-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 9px 22px;
+}
+
+.key-item {
+    font-size: 11px;
+    color: #4b5a6b;
+    max-width: 300px;
+}
+
+.key-item strong {
+    color: #263647;
+}
+
+.dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.teal {
+    background: var(--teal);
+}
+
+.orange {
+    background: var(--orange);
+}
+
+.dash {
+    display: inline-block;
+    width: 19px;
+    border-top: 2px dashed #526779;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 13px;
+}
+
+.chart-card {
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.chart-card .plotly-graph-div {
+    width: 100%;
+}
+
+.takeaway-grid,
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.takeaway {
+    padding: 13px 16px;
+    background: #f7f9fb;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.takeaway ul {
+    padding-left: 18px;
+    margin: 7px 0 0;
+}
+
+.takeaway li {
+    margin: 5px 0;
+}
+
+.callout {
+    background: #f1f8f9;
+    border-left: 4px solid var(--teal);
+    padding: 13px 17px;
+}
+
+.exec-section {
+    padding: 18px 21px;
+}
+
+.exec-section h2 {
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 11px;
+}
+
+.exec-section p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.exec-section ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+.exec-section li {
+    margin: 9px 0;
+    line-height: 1.55;
+}
+
+.exec-card {
+    padding: 15px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #f7f9fb;
+}
+
+.exec-card h3 {
+    margin: 0 0 8px;
+}
+
+.exec-card p {
+    margin: 0;
+}
+
+.highlight-line {
+    border-left: 3px solid var(--teal);
+    padding-left: 13px;
+    margin: 13px 0;
+}
+
+footer {
+    padding: 15px;
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+
+    .chart-grid,
+    .takeaway-grid,
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        padding: 12px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+}
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .panel,
+    .chart-card,
+    .exec-card {
+        break-inside: avoid;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="eyebrow">
+            Detroit Tigers | Performance Science
+        </div>
+
+        <h1>Executive Summary: CMJ &amp; Fastball Velocity</h1>
+        <p>Key findings, player differences, and organizational application</p>
+    </div>
+</header>
+
+<main>
+    
+
+<!-- SECTION 1: PLAYER COMPARISON -->
+
+<section class="panel exec-section">
+
+    <h2>1. Player Comparison</h2>
+
+    <div class="comparison-grid">
+
+        <div class="exec-card">
+
+            <h3 style="color:#087f8c;">
+                Pitcher A
+            </h3>
+
+            <p>
+                All four CMJ performance indicators
+                demonstrated weak negative correlations
+                with average fastball velocity
+                (r = −0.163 to −0.216).
+                No clear positive association emerged.
+            </p>
+
+        </div>
+
+        <div class="exec-card">
+
+            <h3 style="color:#c87928;">
+                Pitcher B
+            </h3>
+
+            <p>
+                Jump height, RSI-modified, and concentric
+                mean power/BM demonstrated moderate
+                positive correlations with average
+                fastball velocity (r = +0.404 to +0.444).
+                Eccentric mean power/BM showed a weak
+                positive correlation (r = +0.102).
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SECTION 2: KEY FINDINGS AND TAKE-HOME MESSAGES -->
+
+<section class="panel exec-section">
+
+    <h2>2. Key Findings & Take-Home Messages</h2>
+
+    <div class="highlight-line">
+        <strong>Key finding:</strong>
+        The relationship between CMJ performance and
+        fastball velocity differed between the two pitchers.
+    </div>
+
+    <div class="highlight-line">
+        <strong>Take-home message:</strong>
+        CMJ performance should be interpreted at the
+        individual-athlete level rather than assuming
+        that better jump performance consistently
+        corresponds to higher pitching velocity.
+    </div>
+
+    <div class="highlight-line">
+        <strong>Practical implication:</strong>
+        CMJ assessments can contribute to physical
+        performance monitoring, but should complement
+        pitching-specific measures rather than serve
+        as standalone indicators of velocity.
+    </div>
+
+</section>
+
+
+<!-- SECTION 3: NOTABLE DIFFERENCES -->
+
+<section class="panel exec-section">
+
+    <h2>3. Notable Differences Between Players</h2>
+
+    <ul>
+
+        <li>
+            <strong>Direction of association:</strong>
+            Pitcher A showed consistently weak negative
+            relationships, whereas Pitcher B showed
+            positive relationships across all four metrics.
+        </li>
+
+        <li>
+            <strong>Strength of association:</strong>
+            Pitcher B demonstrated stronger relationships
+            for jump height, RSI-modified, and concentric
+            mean power/BM than Pitcher A.
+        </li>
+
+        <li>
+            <strong>Metric-specific behavior:</strong>
+            Pitcher B's eccentric mean power/BM
+            correlation was substantially weaker than
+            the other three metrics, suggesting that
+            different CMJ indicators may provide
+            different information within the same athlete.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<!-- SECTION 4: LARGER-SCALE APPLICATION -->
+
+<section class="panel exec-section">
+
+    <h2>4. Application at a Larger Scale</h2>
+
+    <p>
+        These findings provide a starting point for an
+        athlete-specific CMJ monitoring framework
+        across a larger pitching population.
+    </p>
+
+    <ul>
+
+        <li>
+            <strong>Establish individual baselines:</strong>
+            Track each pitcher's typical CMJ performance
+            and fastball velocity over time.
+        </li>
+
+        <li>
+            <strong>Evaluate within-athlete trends:</strong>
+            Determine whether changes in specific CMJ
+            indicators consistently accompany changes
+            in fastball velocity for each pitcher.
+        </li>
+
+        <li>
+            <strong>Identify common patterns:</strong>
+            With a larger sample, examine whether
+            similar relationships emerge across
+            pitchers or whether individualized
+            interpretation remains most appropriate.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<!-- SECTION 5: FUTURE DATA AND CONSIDERATIONS -->
+
+<section class="panel exec-section">
+
+    <h2>5. Future Data & Considerations</h2>
+
+    <ul>
+
+        <li>
+            <strong>Pitching workload:</strong>
+            Pitch counts, throwing volume, and recovery
+            intervals may help explain game-to-game
+            fluctuations in fastball velocity.
+        </li>
+
+        <li>
+            <strong>Readiness and recovery:</strong>
+            Subjective readiness, soreness, and fatigue
+            measures may provide context for changes
+            in CMJ performance.
+        </li>
+
+        <li>
+            <strong>Additional physical qualities:</strong>
+            Lower-body strength, rotational power, and
+            mobility assessments could capture
+            performance characteristics not directly
+            represented by vertical CMJ testing.
+        </li>
+
+        <li>
+            <strong>Standardized testing schedules:</strong>
+            Consistent timing between CMJ assessments
+            and pitching appearances would improve
+            longitudinal comparisons and reduce
+            variability in assessment intervals.
+        </li>
+
+    </ul>
+
+</section>
+
+</main>
+
+<footer>
+    CMJ Performance & Fastball Velocity | 2025 Season
+</footer>
+
+</body>
+</html>
