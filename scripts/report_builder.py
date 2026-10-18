@@ -19,6 +19,8 @@
 
 from pathlib import Path
 from html import escape
+import base64
+import mimetypes
 
 import numpy as np
 import pandas as pd
@@ -41,6 +43,22 @@ REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 COACH_OUTPUT = REPORT_DIR / "coach_report.html"
 EXEC_OUTPUT = REPORT_DIR / "executive_summary.html"
+
+# Header logo: embedded in each HTML file so the reports remain
+# self-contained when viewed locally, downloaded, or hosted on GitHub Pages.
+LOGO_FILE = REPORT_DIR / "html accessories" / "logo.png"
+
+
+def logo_data_uri():
+    """Convert the PNG into an inline image for standalone HTML reports."""
+    if not LOGO_FILE.is_file():
+        raise FileNotFoundError(
+            f"Header logo not found: {LOGO_FILE}\n"
+            "Confirm the filename is logo.png and the folder is 'html accessories'."
+        )
+    encoded = base64.b64encode(LOGO_FILE.read_bytes()).decode("ascii")
+    return f"data:image/png;base64,{encoded}"
+
 
 
 # ------------------------------------------------------------
@@ -247,6 +265,28 @@ header {
 main {
     max-width: 1200px;
     margin: auto;
+}
+
+/* Keep the heading on the left and the logo on the right. */
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.header-copy {
+    min-width: 0;
+}
+
+.header-logo {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 115px;
+    max-height: 86px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 .eyebrow {
@@ -464,6 +504,15 @@ footer {
     header h1 {
         font-size: 22px;
     }
+
+    .header-inner {
+        gap: 12px;
+    }
+
+    .header-logo {
+        max-width: 72px;
+        max-height: 58px;
+    }
 }
 
 @media print {
@@ -487,6 +536,8 @@ footer {
 
 def make_document(title, subtitle, content):
 
+    logo_src = logo_data_uri()
+
     return f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -505,12 +556,15 @@ def make_document(title, subtitle, content):
 
 <header>
     <div class="header-inner">
-        <div class="eyebrow">
-            Detroit Tigers | Performance Science
-        </div>
+        <div class="header-copy">
+            <div class="eyebrow">
+                Detroit Tigers | Performance Science
+            </div>
 
-        <h1>{escape(title)}</h1>
-        <p>{escape(subtitle)}</p>
+            <h1>{escape(title)}</h1>
+            <p>{escape(subtitle)}</p>
+        </div>
+        <img class="header-logo" src="{logo_src}" alt="Report logo">
     </div>
 </header>
 
